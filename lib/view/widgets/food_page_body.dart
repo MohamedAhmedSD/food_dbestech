@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -159,7 +158,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             image: const DecorationImage(
               fit: BoxFit.cover,
               // image: AssetImage(""),
-              image: AssetImage("assets/image/food0.png"),
+              //! downloads images from
+              //? https://www.pexels.com/search/pizza/
+              image: AssetImage("assets/images/food0.jpg"),
             ),
           ),
         ),
@@ -248,9 +249,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   //? ========== third row ===============
                   //? Icons && Texts ===============
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
                       IconAndTextWidget(
                         icon: Icons.circle_sharp,

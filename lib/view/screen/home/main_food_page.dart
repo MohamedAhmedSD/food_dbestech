@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
@@ -32,16 +31,17 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BigText(
-                          text: "Contry",
+                          text: "Sudan",
                           color: AppColors.mainColor,
                         ),
                         //! we can change default text color also from here
                         Row(
                           children: [
                             SmallText(
-                              text: "City",
+                              text: "Omdurman",
                               color: Colors.black54,
                             ),
                             const Icon(Icons.arrow_drop_down_rounded),
@@ -55,7 +55,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                         height: 45,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.blue),
+                            color: AppColors.mainColor),
                         child: const Icon(
                           Icons.search,
                           color: Colors.white,
