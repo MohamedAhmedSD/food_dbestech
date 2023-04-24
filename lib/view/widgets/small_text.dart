@@ -11,7 +11,7 @@ class SmallText extends StatelessWidget {
   SmallText({
     Key? key,
     this.color =
-        const Color(0xFF332d2b), //! default color must as hex not use AppColors
+        const Color(0xFFccc7c5), //! default color must as hex not use AppColors
     required this.text,
     // this.size = 12,
     this.size = 0,
@@ -27,7 +27,7 @@ class SmallText extends StatelessWidget {
         fontFamily: "Roboto",
         color: color,
         // fontSize: size,
-        fontSize: size == 0? Dimensions.font12: size,
+        fontSize: size == 0 ? Dimensions.font12 : size,
         fontWeight: FontWeight.w400,
         height: height, //* default space between lines
       ),
