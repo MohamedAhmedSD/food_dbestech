@@ -1,5 +1,7 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/utils/dimensions.dart';
 
 import '../../utils/colors.dart';
 import 'big_text.dart';
@@ -23,7 +25,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   var _currentPageValue = 0.0;
   final double _scaleFactor = 0.8; //? use 80% from its original size
-  final double _height = 220;
+  // final double _height = 220;
+  final double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -54,22 +57,36 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     //! error == Horizontal viewport was given unbounded height
     //* it due to we use Container dosen't have any size
     //?so give it height to solve it
-    return SizedBox(
-      //! we use this color to see our edges between widgets after end, disable it
-      // color: Colors.redAccent,
-      height: 320,
-      //? === [ PageView ] ===
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          //* we pass position as index for our PageView
-          itemBuilder: (context, position) {
-            return _buildPageItem(position);
-          }),
-    );
+    return Column(children: [
+      SizedBox(
+        //! we use this color to see our edges between widgets after end, disable it
+        // color: Colors.redAccent,
+        // height: 320,
+        height: Dimensions.pageView,
+        //? === [ PageView ] ===
+        child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            //* we pass position as index for our PageView
+            itemBuilder: (context, position) {
+              return _buildPageItem(position);
+            }),
+      ),
+      //?
+      DotsIndicator(
+        dotsCount: 5,
+        position: _currentPageValue,
+        decorator: DotsDecorator(
+            size: const Size.square(9.0),
+            activeColor: AppColors.mainColor,
+            activeSize: const Size(18.0, 9.0),
+            activeShape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      )
+    ]);
   }
-  //! becarful with Scope of class
 
+  //! becarful with Scope of class
   //! make inner use Widget
   Widget _buildPageItem(int index) {
     //? ========= [ dart == Matrix4 to add animation == smpth sliding] === 1:45:00===
@@ -143,12 +160,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         Container(
           //* when put Container inside another
           //? child Container take full size of its parent
-          height:
-              220, //! so no need use height, put with stack its height will apply on UI rather than its parent Container
+          //! so no need use height, put with stack its height will apply on UI rather than its parent Container
+          // height: 220,
+          height: Dimensions.pageViewContainer,
           //? margin here make anti space between our pages
           margin: const EdgeInsets.only(left: 5, right: 5),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(Dimensions.radius30),
             //* make condition stmt => to choose different colors
             //* according to value of page index
             color: index.isEven
@@ -170,11 +188,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Container(
             //* when put Container inside another
             //? child Container take full size of its parent
-            height:
-                120, //! so no need use height, put with stack its height will apply on UI rather than its parent Container
-            margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+            //! so no need use height, put with stack its height will apply on UI rather than its parent Container
+            // height: 120,
+            height: Dimensions.pageViewTextContainer,
+            margin: EdgeInsets.only(
+                left: Dimensions.width30,
+                right: Dimensions.width30,
+                bottom: Dimensions.width30),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 color: Colors.white,
                 //! we need add shadow on bottom with bulur
                 //* after add it we need delete blur that we not need it
@@ -200,13 +222,17 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             //? === [3] ===
 
             child: Container(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              padding: EdgeInsets.only(
+                  top: Dimensions.height15,
+                  left: Dimensions.height15,
+                  right: Dimensions.height15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BigText(text: "Chiness Dide"),
-                  const SizedBox(
-                    height: 10,
+                  BigText(text: "Chiness Side"),
+                  SizedBox(
+                    // height: 10,
+                    height: Dimensions.height10,
                   ),
                   //? ========== first row ===============
                   Row(
@@ -229,33 +255,34 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ),
                       //? ========== second row ===============
                       //? add texts ================
-                      const SizedBox(
-                        width: 10,
+                      SizedBox(
+                        width: Dimensions.width10,
                       ),
                       SmallText(
                         text: "4.5",
                       ),
-                      const SizedBox(
-                        width: 10,
+                      SizedBox(
+                        width: Dimensions.width10,
                       ),
                       SmallText(
                         text: "1287",
                       ),
-                      const SizedBox(
-                        width: 10,
+                      SizedBox(
+                        width: Dimensions.width10,
                       ),
                       SmallText(
                         text: "comments",
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    // height: 20,
+                    height: Dimensions.height20,
                   ),
                   //? ========== third row ===============
                   //? Icons && Texts ===============
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       IconAndTextWidget(
                         icon: Icons.circle_sharp,

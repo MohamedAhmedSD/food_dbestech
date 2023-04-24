@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/utils/dimensions.dart';
 
 import '../../../utils/colors.dart';
 import '../../widgets/big_text.dart';
@@ -16,6 +18,16 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   //* why we use container inside another
   Widget build(BuildContext context) {
+    //? ========================================================
+    //! how we use Mq to know our current device size
+    //? by using print under stf widget build
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
+    if (kDebugMode) {
+      print(
+          "My current device height ${h.toString()} and width is ${w.toString()}");
+    }
+    //? ========================================================
     return Scaffold(
       body: Column(
         children: [
@@ -25,14 +37,17 @@ class _MainFoodPageState extends State<MainFoodPage> {
           //?so give it height to solve it
           Container(
             child: Container(
-              margin: const EdgeInsets.only(top: 45, bottom: 15),
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(
+                  top: Dimensions.width45, bottom: Dimensions.width45),
+              padding: EdgeInsets.only(
+                  left: Dimensions.height20, right: Dimensions.height20),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        //? ======= header ===========
                         BigText(
                           text: "Sudan",
                           color: AppColors.mainColor,
@@ -51,22 +66,24 @@ class _MainFoodPageState extends State<MainFoodPage> {
                     ),
                     Center(
                       child: Container(
-                        width: 45,
-                        height: 45,
+                        width: Dimensions.width45,
+                        height: Dimensions.height45,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius15),
                             color: AppColors.mainColor),
-                        child: const Icon(
+                        child: Icon(
                           Icons.search,
                           color: Colors.white,
+                          //! default icon size 24
+                          size: Dimensions.iconSize24,
                         ),
                       ),
                     ),
                   ]),
             ),
           ),
-          //? === [Part 2] ===
-
+          //? //? ======= body ===========
           const FoodPageBody(),
         ],
       ),
