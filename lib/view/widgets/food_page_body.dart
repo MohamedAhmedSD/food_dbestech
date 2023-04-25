@@ -82,7 +82,156 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeSize: const Size(18.0, 9.0),
             activeShape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-      )
+      ),
+      //? ======= popular and ListView
+      SizedBox(
+        height: Dimensions.height30,
+      ),
+      Container(
+        margin: EdgeInsets.only(left: Dimensions.width30),
+        child: Row(
+          crossAxisAlignment:
+              CrossAxisAlignment.end, //* to make texts on bottom
+          children: [
+            BigText(text: "Popular"),
+            SizedBox(
+              width: Dimensions.width10,
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 3),
+              child: const Text(
+                ".",
+                style: TextStyle(color: Colors.black26),
+              ),
+            ),
+            SizedBox(
+              width: Dimensions.width10,
+            ),
+            //!use Container to give them margins
+            Container(
+                margin: const EdgeInsets.only(bottom: 2),
+                child: SmallText(text: "Food pairing")),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: Dimensions.height20,
+      ),
+      //? ========= ListView
+      //* some notes:-
+      ///! FlutterError (Vertical viewport was given unbounded height.
+      ///? your ListView need to wrap under parent with certain height size
+      ///! we see now yellow black error == overflow?
+      ///? add height & width to your image parents to see it
+      ///! ListView should use physics && shrinkwrap
+      ///* our physics must end with => ( ) or give us error
+      //! overflow not disappear?
+      //* go to upper widget you want under it scrollable as => FoodPageBody
+      //? then wrap it under => Expanded => SCSV
+
+      //! we can Remove SB or Container that Wrap LV.builder
+      // SizedBox(
+      //   height:
+      //       900, //! give size more than your device height to take all possible H
+      //   child:
+
+      ListView.builder(
+          //* we add => physics && shrinkwrap to deal well with scroll
+          //! physics options should end with => ()
+          //? if not write () at them => the argument type "type" cann't assign to scrollphysics
+          physics:
+              // const NeverScrollableScrollPhysics(), //? or AlwaysScrollableScrollPhysics()
+              const AlwaysScrollableScrollPhysics(), //? or AlwaysScrollableScrollPhysics()
+          //* NSSP => scrolle all page, ASSP => scrolle on certain section
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  bottom: Dimensions.height10),
+              child: Row(
+                children: [
+                  //? ==== image section ==========
+                  Container(
+                    // height: 120,
+                    height: Dimensions.listViewImgSize,
+                    width: Dimensions.listViewImgSize,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      color: Colors.white,
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/images/food0.jpg"),
+                      ),
+                    ),
+                  ),
+                  //? ==== text section ==========
+                  //! we need use all possible width so we wrap Container inside EXpanded
+                  //* then delete width or let it
+                  Expanded(
+                    child: Container(
+                      // height: 100,
+                      height: Dimensions.listViewTextContSize,
+                      // width: 200, //? may let it, not have an effect
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(Dimensions.radius20),
+                          bottomRight: Radius.circular(Dimensions.radius20),
+                        ),
+                        // color: Colors.red,
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: Dimensions.width10,
+                          right: Dimensions.width10,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(text: "Nutritious fruit meal in Sudan"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            SmallText(text: "With Sudanese characteristics"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            //? last row == icons ############
+                            //? Icons && Texts ===============
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                IconAndTextWidget(
+                                  icon: Icons.circle_sharp,
+                                  text: "Normal",
+                                  iconColor: AppColors.iconColor1,
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.location_on,
+                                  text: "1.7km",
+                                  iconColor: AppColors.mainColor,
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.access_time_rounded,
+                                  text: "32min",
+                                  iconColor: AppColors.iconColor2,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+      // ),
     ]);
   }
 
@@ -300,7 +449,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         iconColor: AppColors.iconColor2,
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

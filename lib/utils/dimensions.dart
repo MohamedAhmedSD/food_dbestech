@@ -71,4 +71,12 @@ class Dimensions {
   //! ===== icon size ====
   static double iconSize15 = screenHeight / 56.27;
   static double iconSize24 = screenHeight / 35.17;
+
+  //! ===== List view size ====
+  // static double listViewImgSize = screenwidth / 3.25;
+  // static double listViewTextContSize = screenwidth / 3.9;
+
+  //* or by height
+  static double listViewImgSize = screenHeight / 7.03;
+  static double listViewTextContSize = screenHeight / 8.44;
 }

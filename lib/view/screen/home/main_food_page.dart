@@ -84,7 +84,8 @@ class _MainFoodPageState extends State<MainFoodPage> {
             ),
           ),
           //? //? ======= body ===========
-          const FoodPageBody(),
+          //* wrap it under Ex => SCSV to make what under it scrollable
+          const Expanded(child: SingleChildScrollView(child: FoodPageBody())),
         ],
       ),
     );
